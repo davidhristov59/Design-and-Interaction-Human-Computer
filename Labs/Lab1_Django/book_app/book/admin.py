@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import BookTranslator, Book, Genre, Rating, Translator
 
 # Register your models here.
-class BookRatingInline(admin.TabularInline): #many-to-many
+class BookRatingInline(admin.TabularInline):
     model = Rating
     extra = 1
 
