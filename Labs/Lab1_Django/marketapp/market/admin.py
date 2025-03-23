@@ -74,3 +74,10 @@ class ProductAdmin(admin.ModelAdmin):
 
     list_display = ("name", "type_product", "product_home_country", "code")
     list_filter = ("type_product", "product_home_country")
+
+
+admin.site.register(Market, MarketAdmin)
+admin.site.register(Employee, EmployeeAdmin)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(ContactInfo)
+admin.site.register(MarketProductInline)
