@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Pilot, Airline, AirlinePilot, Balloon, Flight
+from .models import Pilot, Airline, AirlinePilot, Balloon, Flight, FlightReport, AirlineLog
 
 # Register your models here.
 
@@ -15,7 +15,7 @@ class AirlineAdmin(admin.ModelAdmin):
     inlines = [AirlinePilotInline]
 
     def has_add_permission(self, request):
-        return False
+        return True
 
 
 class PilotAdmin(admin.ModelAdmin):
@@ -50,5 +50,7 @@ admin.site.register(Airline, AirlineAdmin)
 admin.site.register(Flight, FlightAdmin)
 admin.site.register(Pilot, PilotAdmin)
 admin.site.register(Balloon)
+admin.site.register(FlightReport)
+admin.site.register(AirlineLog)
 
 

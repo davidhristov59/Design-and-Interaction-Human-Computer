@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# null=True allows the database to store a NULL value for this field, meaning it can be empty at the database level.
+# blank=True allows the field to be left empty in forms (e.g., admin or user forms).
+# For ForeignKey, use both if you want the relation to be optional in both the database and forms.
+
 class Balloon(models.Model):
     TYPE_CHOICES = {
         "S" : "Small Balloon",
@@ -56,14 +60,28 @@ class AirlinePilot(models.Model):
 # Create your models here.
 class Flight(models.Model):
     code = models.CharField(max_length=100, unique=True)
-    take_off_airport = models.CharField(max_length=100)
-    landing_airport = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    take_off_airport = models.CharField(max_length=100, null=True, blank=True)
+    landing_airport = models.CharField(max_length=100, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     photo = models.ImageField(upload_to="flight_photos/", null=True, blank=True)
     balloon = models.ForeignKey(Balloon, on_delete=models.CASCADE)
     pilot = models.ForeignKey(Pilot, on_delete=models.CASCADE)
     airline = models.ForeignKey(Airline, on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.code} {self.take_off_airport} - {self.landing_airport}"
+
+
+class FlightReport(models.Model):
+    flight = models.ForeignKey(Flight, on_delete=models.SET_NULL, null=True, blank=True)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class AirlineLog(models.Model):
+    name = models.CharField(max_length=100)
+    year_founded = models.IntegerField()
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
