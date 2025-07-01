@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add car</title>
+     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <ul class="nav justify-content-between bg-info">
+  <li class="nav-item">
+    <a class="nav-link active text-white" aria-current="page" href="#" style="text-decoration: none">LAB 4 DNICK</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" href="/newCar" style="text-decoration: none">Create auto</a>
+  </li>
+
+  </li>
+</ul>
+
+        <div class="py-5 d-flex justify-content-center bg-secondary-subtle">
+    <form method="post" action="{% url 'newCar' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+</div>
+</div>
+</div>
+</body>
+</html>

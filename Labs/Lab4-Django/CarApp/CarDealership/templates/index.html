@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"/>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-info bg-info">
+        <div class="container">
+            <a class="navbar-brand text-white" href="#">Car Dealership</a>
+            <a class="btn btn-light" href="/newCar">Create Auto</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row g-4">
+            {% for cars in cars_list %}
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ cars.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Car photo">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ cars.model }}</h5>
+                            <p class="card-text">{{ cars.distributor.name }}</p>
+                            <!--url 'details' go zimame imeto od urls-->
+                            <a href="{% url 'details' cars.id %}" class="btn btn-primary w-100">Details</a> <!--moram id-to da go pratam-->
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
