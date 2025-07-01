@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %} <!-- In Django templates, only content inside "block content" is rendered in the child template area of base.html.-->
+<div class="container-fluid">
+    <div class="py-5 d-flex justify-content-center bg-secondary-subtle">
+
+        {% if form.instance.photo %} <!--Check if the property has a photo-->
+                <img src="{{ form.instance.photo.url }}" alt="Current Property Photo"  style="max-height: 300px;">
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data" action="{% url 'edit_property' prop_id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

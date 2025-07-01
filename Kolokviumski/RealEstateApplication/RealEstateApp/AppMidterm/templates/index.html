@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-light py-5">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+        <div>
+            <h1 class="display-3 fw-bold">Architecture <br><span class="text-primary">Bureau</span></h1>
+            <p class="lead text-muted">Discover your dream home with us</p>
+        </div>
+        <div>
+            <img src="{% static 'house3.jpg' %}" alt="Modern House" class="img-fluid rounded shadow" style="max-height: 400px;">
+        </div>
+    </div>
+</section>
+
+<!-- Feature Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-md-6">
+                <img src="{% static 'house4.jpg' %}" alt="House Feature" class="img-fluid rounded shadow-sm">
+            </div>
+            <div class="col-md-6">
+                <h3 class="fw-bold">Why Choose Us</h3>
+                <p class="text-muted">
+                    We provide elegant architecture and real estate solutions. With years of expertise and a curated list of stunning properties, we are your go-to partner for your next home or investment.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Property Listing -->
+<section class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">🏠 View Our Properties</h2>
+        <div class="row g-4">
+            {% for property in properties %}
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        {% if property.photo %}
+                            <img src="{{ property.photo.url }}" class="card-img-top" alt="{{ property.name }}">
+                        {% else %}
+                            <img src="{% static 'default-house.jpg' %}" class="card-img-top" alt="Default House">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ property.name }}</h5>
+                            <p class="card-text">📐 Area: {{ property.area }} m²</p>
+                            <p class="card-text">💰 Price: {{ property.price }}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <a href="{% url 'details' property.id %}" class="btn btn-outline-info btn-sm">Details</a>
+                            <a href="{% url 'edit_property' property.id %}" class="btn btn-outline-primary btn-sm">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">No properties available right now.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

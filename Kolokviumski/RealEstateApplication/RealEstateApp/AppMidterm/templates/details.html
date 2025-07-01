@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow">
+                {% if property.photo %}
+                    <img src="{{ property.photo.url }}" class="card-img-top" alt="{{ property.name }}" style="max-height: 350px; object-fit: cover;">
+                {% else %}
+                    <img src="{% static 'default-house.jpg' %}" class="card-img-top" alt="Default House" style="max-height: 350px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h3 class="card-title mb-3">{{ property.name }}</h3>
+                    <p class="card-text">📐 <strong>Area:</strong> {{ property.area }} m²</p>
+                    <p class="card-text">💰 <strong>Price:</strong> {{ price }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

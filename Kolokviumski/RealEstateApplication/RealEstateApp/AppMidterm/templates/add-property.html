@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %} <!-- In Django templates, only content inside "block content" is rendered in the child template area of base.html.-->
+<div class="container-fluid">
+    <div class="py-5 d-flex justify-content-center bg-secondary-subtle">
+        <form method="post" enctype="multipart/form-data" action="{% url 'add_property' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
